@@ -2,6 +2,9 @@
 
 const API_BASE = window.location.origin.startsWith('file') ? 'http://127.0.0.1:5000' : '';
 
+// Localtunnel bypass headers
+const TUNNEL_HEADERS = { 'bypass-tunnel-reminder': 'true' };
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // 1. Navigation Tab Controller
@@ -43,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 try {
                     const res = await fetch(`${API_BASE}/api/upload-document`, {
                         method: 'POST',
+                        headers: TUNNEL_HEADERS,
                         body: formData
                     });
                     const data = await res.json();
@@ -81,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const res = await fetch(`${API_BASE}/api/fill-form`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json', ...TUNNEL_HEADERS },
                     body: JSON.stringify({ form_url_or_path: formUrl })
                 });
 
@@ -151,6 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const res = await fetch(`${API_BASE}/api/fill-and-export-pdf`, {
                     method: 'POST',
+                    headers: TUNNEL_HEADERS,
                     body: formData
                 });
                 const data = await res.json();
@@ -179,7 +184,7 @@ async function checkServerHealth() {
     const badgeText = document.getElementById('server-status-text');
     const badge = document.getElementById('server-status-badge');
     try {
-        const res = await fetch(`${API_BASE}/api/profile`);
+        const res = await fetch(`${API_BASE}/api/profile`, { headers: TUNNEL_HEADERS });
         if (res.ok) {
             if (badgeText) badgeText.innerText = 'Server Online';
             if (badge) badge.style.borderColor = 'rgba(16, 185, 129, 0.35)';
@@ -196,7 +201,7 @@ async function loadProfileVault() {
     if (!gridEl) return;
 
     try {
-        const res = await fetch(`${API_BASE}/api/profile`);
+        const res = await fetch(`${API_BASE}/api/profile`, { headers: TUNNEL_HEADERS });
         const fields = await res.json();
 
         if (!fields || fields.length === 0) {
