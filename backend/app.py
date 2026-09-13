@@ -81,6 +81,9 @@ def get_latest_user_profile(db: Session) -> Dict[str, Dict[str, Any]]:
 
 @app.get("/")
 def root():
+    index_path = Path(config.BASE_DIR) / "index.html"
+    if index_path.exists():
+        return FileResponse(str(index_path))
     return RedirectResponse(url="/mobile/")
 
 @app.get("/preview-image")

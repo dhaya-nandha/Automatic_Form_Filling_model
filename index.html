@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FormFill AI — Automatic Form Filling Platform</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">⚡</div>
+                <div class="logo-text">
+                    <span class="brand-name">FormFill <span class="highlight">AI</span></span>
+                    <span class="brand-sub">Automatic Form-Filling Platform</span>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <button class="nav-tab active" data-tab="tab-sandbox">⚡ Live Auto-Fill</button>
+                <button class="nav-tab" data-tab="tab-profile">👤 Profile Vault</button>
+                <button class="nav-tab" data-tab="tab-pdf">📄 PDF Form Filler</button>
+                <button class="nav-tab" data-tab="tab-api">🛠️ Model & API Hub</button>
+            </nav>
+            <div class="nav-status">
+                <div class="status-indicator" id="server-status-badge">
+                    <span class="dot"></span> <span id="server-status-text">Server Online</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Body Container -->
+    <main class="main-container">
+
+        <!-- TAB 1: LIVE AUTO-FILL SANDBOX -->
+        <section id="tab-sandbox" class="tab-page active">
+            
+            <!-- Hero Banner -->
+            <div class="hero-banner">
+                <h1>Automatic Google Form & Web Form Filler</h1>
+                <p>Upload your resume or marksheets, paste any live form link, and watch AI parse, match, and fill inputs automatically.</p>
+            </div>
+
+            <!-- Workflow Grid -->
+            <div class="grid-2col">
+                
+                <!-- Left Column: Document & Form Input -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2><span class="step-num">1</span> Upload User Document(s)</h2>
+                        <span class="badge info">Resumes, Marksheets, Certs</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="upload-dropzone" id="sandbox-upload-zone">
+                            <input type="file" id="sandbox-doc-input" accept=".pdf,.docx,.txt" multiple>
+                            <div class="drop-icon">📂</div>
+                            <div class="drop-text">Drag & Drop Resume, Marksheet, or Certificate</div>
+                            <div class="drop-hint">Supports PDF, DOCX, TXT</div>
+                        </div>
+                        <div id="sandbox-upload-status" class="alert-box hidden"></div>
+                    </div>
+
+                    <div class="card-header" style="margin-top: 24px; border-top: 1px solid var(--border); padding-top: 20px;">
+                        <h2><span class="step-num">2</span> Target Google Form / Web Form Link</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="sandbox-form-url">Live Google Form URL or Web Link</label>
+                            <input type="text" id="sandbox-form-url" class="form-control" placeholder="https://docs.google.com/forms/d/e/.../viewform" value="https://docs.google.com/forms/d/e/1FAIpQLSeuoP6EKvaRjYLa0rWlGFlsZpOwKJNVufoNg4oy7o5sdnswMw/viewform">
+                        </div>
+
+                        <button id="btn-run-autofill" class="btn btn-primary btn-block">
+                            <span>⚡ Auto-Fill Live Form Now</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Column: Live Match Visualizer & Preview -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2><span class="step-num">3</span> AI Matching & Execution Results</h2>
+                    </div>
+                    <div class="card-body">
+                        <div id="sandbox-placeholder" class="empty-state">
+                            <div class="empty-icon">🤖</div>
+                            <p>Ready for auto-fill execution. Upload a document or click <strong>Auto-Fill Live Form Now</strong> to test!</p>
+                        </div>
+
+                        <div id="sandbox-results" class="results-container hidden">
+                            
+                            <!-- Stat Badges -->
+                            <div class="stat-row">
+                                <div class="stat-card">
+                                    <span class="stat-value" id="stat-total">0</span>
+                                    <span class="stat-label">Total Fields</span>
+                                </div>
+                                <div class="stat-card success">
+                                    <span class="stat-value" id="stat-filled">0</span>
+                                    <span class="stat-label">Auto-Filled</span>
+                                </div>
+                                <div class="stat-card warning">
+                                    <span class="stat-value" id="stat-review">0</span>
+                                    <span class="stat-label">Flagged</span>
+                                </div>
+                            </div>
+
+                            <!-- Match Table -->
+                            <div class="table-wrapper">
+                                <h3>Semantic Field Matching Details</h3>
+                                <table class="match-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Form Question Label</th>
+                                            <th>Matched Attribute</th>
+                                            <th>Derived Value</th>
+                                            <th>Similarity</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="match-table-body">
+                                        <!-- Dynamically generated -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Live Screenshot Preview -->
+                            <div class="screenshot-wrapper" id="screenshot-box">
+                                <h3>📸 Live Form Browser Screenshot Preview</h3>
+                                <div class="img-frame">
+                                    <img id="screenshot-img" src="" alt="Filled Form Screenshot Preview">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TAB 2: PROFILE VAULT -->
+        <section id="tab-profile" class="tab-page">
+            <div class="card">
+                <div class="card-header">
+                    <h2>👤 Extracted AI Profile Vault</h2>
+                    <span class="badge primary" id="profile-count-badge">0 Facts Extracted</span>
+                </div>
+                <div class="card-body">
+                    <p class="section-desc">These canonical entities are extracted from your uploaded documents and remembered for form filling.</p>
+                    <div id="profile-grid" class="profile-cards-grid">
+                        <div class="loading-spinner">Loading extracted profile entities...</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: PDF FORM FILLER -->
+        <section id="tab-pdf" class="tab-page">
+            <div class="card">
+                <div class="card-header">
+                    <h2>📄 Static PDF Application Form Filler</h2>
+                    <span class="badge info">PDF Export</span>
+                </div>
+                <div class="card-body">
+                    <p class="section-desc">Upload a CV/Resume alongside a static PDF Application Form to overlay facts and generate a filled PDF document.</p>
+                    
+                    <div class="grid-2col" style="margin-top: 20px;">
+                        <div class="form-group">
+                            <label for="pdf-cv-input">1. Select CV / Resume (PDF / DOCX)</label>
+                            <input type="file" id="pdf-cv-input" class="form-control" accept=".pdf,.docx,.txt">
+                        </div>
+                        <div class="form-group">
+                            <label for="pdf-form-input">2. Select Application Form (PDF / HTML)</label>
+                            <input type="file" id="pdf-form-input" class="form-control" accept=".pdf,.html">
+                        </div>
+                    </div>
+
+                    <button id="btn-fill-pdf" class="btn btn-secondary btn-block" style="margin-top: 15px;">
+                        <span>📥 Fill & Export PDF Document</span>
+                    </button>
+
+                    <div id="pdf-export-result" class="alert-box success hidden" style="margin-top: 20px;">
+                        <strong>PDF Generation Success!</strong> <a id="pdf-download-link" href="#" target="_blank" class="download-link">Click here to download filled PDF</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: MODEL & API HUB (FOR TEAMMATES) -->
+        <section id="tab-api" class="tab-page">
+            <div class="card">
+                <div class="card-header">
+                    <h2>🛠️ Deep Learning Model & API Integration Hub</h2>
+                    <span class="badge warning">Teammate Integration Specs</span>
+                </div>
+                <div class="card-body">
+                    <p class="section-desc">Specifications for the Deep Learning / NER Model teammate to plug custom trained weights into our FastAPI backend.</p>
+
+                    <div class="api-endpoint-card">
+                        <div class="method-tag post">POST</div>
+                        <div class="endpoint-path">/api/upload-document</div>
+                        <div class="endpoint-desc">Accepts PDF/DOCX/TXT file, calls <code>core/extractor.py</code>, and upserts facts into DB.</div>
+                    </div>
+
+                    <div class="api-endpoint-card">
+                        <div class="method-tag post">POST</div>
+                        <div class="endpoint-path">/api/match-fields</div>
+                        <div class="endpoint-desc">Accepts form questions, runs Sentence-Transformer cosine matching, returns predicted values.</div>
+                    </div>
+
+                    <div class="api-endpoint-card">
+                        <div class="method-tag post">POST</div>
+                        <div class="endpoint-path">/api/fill-form</div>
+                        <div class="endpoint-desc">Triggers Playwright Chromium engine to fill live Google Forms and returns screenshot preview.</div>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <a href="/docs" target="_blank" class="btn btn-outline">📖 Open Interactive Swagger / OpenAPI Documentation</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p>FormFill AI Platform &copy; 2026 — End-to-End Automatic Form Filling System</p>
+        </div>
+    </footer>
+
+    <script src="./app.js"></script>
+</body>
+</html>
