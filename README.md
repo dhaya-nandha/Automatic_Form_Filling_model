@@ -10,37 +10,45 @@ An end-to-end **Web Application Platform & FastAPI Backend System** that automat
 
 ---
 
-## 📋 How to Run & Verify this Work (Step-by-Step for Team Lead & Testers)
+## 🖥️ How to Run this Project on ANY Laptop (Step-by-Step)
 
-Follow these simple steps to start the application and test all features:
-
-### 1️⃣ Step 1: Start the Web Application Server
-
-* **Option A: One-Click Launcher (Windows)**:
-  Simply double-click the **`run.bat`** file in the project folder!
-
-* **Option B: Command Line (Linux / macOS / Windows)**:
-  ```bash
-  # 1. Install dependencies
-  pip install -r requirements.txt
-  playwright install chromium
-
-  # 2. Run the server
-  python main.py
-  ```
+### ❓ What is `run.bat`?
+**`run.bat`** is a **one-click launcher script** created for Windows computers. When you double-click it, it automatically opens the terminal, starts the FastAPI backend server (`python main.py`), loads the AI matching engine, and serves the web application platform locally.
 
 ---
 
-### 2️⃣ Step 2: Open the Web Platform
+### 📥 Step-by-Step Instructions to Run on Any Laptop:
 
-Open your web browser and navigate to:
+#### 1. Download / Pull the Code
+Open Terminal or Command Prompt on the laptop and run:
+```bash
+git clone https://github.com/dhaya-nandha/Automatic_Form_Filling_model.git
+cd Automatic_Form_Filling_model
+```
+*(If the repository is already cloned on the laptop, just run `git pull` to fetch the latest code).*
+
+#### 2. Install Dependencies (First Time Only)
+Run these two commands to install required Python libraries and Playwright Chromium browser:
+```bash
+pip install -r requirements.txt
+playwright install chromium
+```
+
+#### 3. Launch the Application
+* **Windows**: Simply **double-click `run.bat`** (or run `.\run.bat` in Command Prompt / PowerShell).
+* **Linux / macOS**: Run `python main.py`.
+
+#### 4. Open in Web Browser
+Open Chrome, Edge, Brave, or Firefox and navigate to:
 👉 **[http://127.0.0.1:5000/](http://127.0.0.1:5000/)**
 
 *(For interactive API documentation & Swagger UI, open [http://127.0.0.1:5000/docs](http://127.0.0.1:5000/docs)).*
 
 ---
 
-### 3️⃣ Step 3: Test & Verify Features
+## 📋 Testing & Verification Checklist for Team Lead & Testers
+
+Follow these simple steps to test and verify all platform features:
 
 1. **⚡ Live Auto-Fill Sandbox**:
    * Under **Section 1**, drag and drop any resume or marksheet document (`.pdf`, `.docx`, `.txt`).
