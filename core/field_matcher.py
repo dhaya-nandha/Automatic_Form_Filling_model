@@ -17,22 +17,37 @@ class SemanticFieldMatcher:
         self._precompute_canonical_embeddings()
 
     def _load_model(self):
+        import os
+        if os.getenv("DISABLE_HEAVY_EMBEDDINGS", "0") == "1":
+            print("[FieldMatcher] Heavy embeddings disabled for low-RAM cloud host.")
+            self.model = None
+            return
+
+        try:
+            import torch
+            torch.set_num_threads(1)
+        except Exception:
+            pass
+
         try:
             from sentence_transformers import SentenceTransformer
             self.model = SentenceTransformer(config.EMBEDDING_MODEL_NAME)
         except Exception as e:
-            print(f"[FieldMatcher] sentence-transformers model loading fallback: {e}")
+            print(f"[FieldMatcher] Lightweight matcher active (Memory guard): {e}")
             self.model = None
 
     def _precompute_canonical_embeddings(self):
         if not self.model:
             return
 
-        for canonical_key, aliases in config.CANONICAL_SCHEMA.items():
-            # Combine canonical key and aliases into descriptive search strings
-            phrases = [canonical_key.replace("_", " ")] + aliases
-            embeddings = self.model.encode(phrases, convert_to_tensor=True)
-            self.canonical_embeddings[canonical_key] = embeddings
+        try:
+            for canonical_key, aliases in config.CANONICAL_SCHEMA.items():
+                phrases = [canonical_key.replace("_", " ")] + aliases
+                embeddings = self.model.encode(phrases, convert_to_tensor=True)
+                self.canonical_embeddings[canonical_key] = embeddings
+        except Exception as e:
+            print(f"[FieldMatcher] Could not precompute embeddings (OOM Guard): {e}")
+            self.model = None
 
     def match_label_to_canonical(self, label: str) -> Tuple[Optional[str], float]:
         """

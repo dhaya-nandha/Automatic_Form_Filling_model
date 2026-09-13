@@ -1,7 +1,11 @@
 services:
   - type: web
-    name: formfill-ai-backend
-    env: docker
+    name: automatic-form-filler
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
     plan: free
-    dockerfilePath: ./Dockerfile
     autoDeploy: true
+    envVars:
+      - key: DISABLE_HEAVY_EMBEDDINGS
+        value: "1"
