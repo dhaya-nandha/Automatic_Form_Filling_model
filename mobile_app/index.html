@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FormFill AI Mobile</title>
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#1e293b">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="app-header">
+        <div class="brand">
+            <div class="brand-icon">⚡</div>
+            <div class="brand-title">FormFill AI</div>
+        </div>
+        <div class="header-actions">
+            <button class="server-btn" id="btn-server-settings" title="Configure Server IP">⚙️ Host</button>
+            <div class="status-badge" id="api-status">
+                <span class="status-dot"></span> <span id="status-text">Online</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Body -->
+    <main class="app-body">
+
+        <!-- TAB 1: LIVE AUTO-FILLER -->
+        <section id="tab-live" class="tab-content active">
+
+            <!-- Card 1: Upload Documents -->
+            <div class="card">
+                <div class="card-title">📄 Step 1: Upload Document(s)</div>
+                <div class="card-subtitle">Upload your Resume, Marksheets, or Certificates. AI extracts facts into your personal profile.</div>
+
+                <div class="upload-box" id="upload-zone">
+                    <input type="file" id="live-doc-input" accept=".pdf,.docx,.txt" multiple>
+                    <div class="upload-icon">📂</div>
+                    <div class="upload-text">Tap to Select Document(s)</div>
+                    <div class="upload-sub">PDF, DOCX, or TXT supported</div>
+                </div>
+
+                <div id="doc-upload-status" class="status-msg"></div>
+            </div>
+
+            <!-- Card 2: Live Form Link -->
+            <div class="card">
+                <div class="card-title">🔗 Step 2: Paste Google Form URL</div>
+                <div class="card-subtitle">Paste any live Google Form URL or web form link to fill automatically.</div>
+
+                <div class="form-group">
+                    <label class="form-label" for="live-form-url">Target Google Form / Web Form Link</label>
+                    <input type="text" id="live-form-url" class="input-field" placeholder="https://docs.google.com/forms/d/e/.../viewform" value="https://docs.google.com/forms/d/e/1FAIpQLSeuoP6EKvaRjYLa0rWlGFlsZpOwKJNVufoNg4oy7o5sdnswMw/viewform">
+                </div>
+
+                <button class="btn-primary" id="btn-fill-live">
+                    <span>⚡ Auto-Fill Live Form Now</span>
+                </button>
+            </div>
+
+            <!-- Card 3: Execution Output -->
+            <div class="card hidden" id="result-card">
+                <div class="card-title">🎉 Live Fill Results</div>
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div class="stat-val" id="res-total">0</div>
+                        <div class="stat-lbl">Total Fields</div>
+                    </div>
+                    <div class="stat-card success">
+                        <div class="stat-val" id="res-filled">0</div>
+                        <div class="stat-lbl">Auto-Filled</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-val" id="res-review">0</div>
+                        <div class="stat-lbl">Flagged</div>
+                    </div>
+                </div>
+
+                <div class="preview-box hidden" id="preview-box">
+                    <div class="card-title" style="font-size: 0.95rem; margin-top: 14px;">📸 Live Form Screenshot Preview</div>
+                    <div class="preview-img-wrapper">
+                        <img id="preview-img" src="" alt="Filled Form Screenshot Preview">
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- TAB 2: AI PROFILE -->
+        <section id="tab-profile" class="tab-content">
+            <div class="card">
+                <div class="card-title">👤 Extracted AI Profile</div>
+                <div class="card-subtitle">Verified facts learned from your uploaded documents.</div>
+
+                <div id="profile-list" class="profile-grid">
+                    <div style="text-align:center; padding: 20px; color: var(--text-muted);">Loading profile facts...</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Host Config Modal -->
+    <div id="server-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="card-title">⚙️ Backend Server Host</div>
+            <div class="card-subtitle">Set the backend server URL (required when running inside APK).</div>
+            <div class="form-group">
+                <label class="form-label" for="server-url-input">Server Base URL</label>
+                <input type="text" id="server-url-input" class="input-field" value="https://salt-applying-successful-roy.trycloudflare.com">
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 16px;">
+                <button class="btn-primary" id="btn-save-server" style="padding: 10px;">Save & Test</button>
+                <button class="server-btn" id="btn-close-server" style="padding: 10px;">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="bottom-bar">
+        <button class="nav-btn active" data-tab="tab-live">
+            <span class="nav-icon">⚡</span>
+            <span>Live Auto-Fill</span>
+        </button>
+        <button class="nav-btn" data-tab="tab-profile">
+            <span class="nav-icon">👤</span>
+            <span>My Profile</span>
+        </button>
+    </nav>
+
+    <script src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+.git
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache
+android
+downloads
+uploads/*.pdf
+uploads/*.docx
+form_filler.db
+*.apk

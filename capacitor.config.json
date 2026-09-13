@@ -1,0 +1,9 @@
+{
+  "appId": "com.formfill.ai",
+  "appName": "FormFill AI",
+  "webDir": "mobile_app",
+  "bundledWebRuntime": false,
+  "server": {
+    "cleartext": true
+  }
+}

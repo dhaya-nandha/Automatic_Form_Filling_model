@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Official Candidate Application Form</title>
+    <style>
+        body { font-family: 'Helvetica', 'Arial', sans-serif; margin: 40px; background-color: #f8fafc; color: #1e293b; }
+        .form-card { max-width: 650px; margin: 0 auto; background: white; padding: 35px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .header { text-align: center; border-bottom: 2px solid #4f46e5; padding-bottom: 15px; margin-bottom: 25px; }
+        .header h1 { margin: 0; color: #4f46e5; font-size: 24px; text-transform: uppercase; letter-spacing: 1px; }
+        .header p { margin: 5px 0 0 0; color: #64748b; font-size: 14px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 14px; color: #334155; }
+        .input-box { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; box-sizing: border-box; background-color: #f8fafc; }
+        .row { display: flex; gap: 15px; }
+        .col { flex: 1; }
+        .submit-btn { width: 100%; background: #4f46e5; color: white; border: none; padding: 14px; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="form-card">
+        <div class="header">
+            <h1>Candidate Application Form</h1>
+            <p>Technology & AI Engineering Recruitment</p>
+        </div>
+
+        <form id="recruitment-form">
+            <div class="form-group">
+                <label for="full_name">Candidate Full Name</label>
+                <input type="text" class="input-box" id="full_name" name="full_name" placeholder="Enter your full name">
+            </div>
+
+            <div class="row">
+                <div class="col form-group">
+                    <label for="contact_email">Email Address</label>
+                    <input type="email" class="input-box" id="contact_email" name="contact_email" placeholder="email@example.com">
+                </div>
+                <div class="col form-group">
+                    <label for="phone_number">Contact Phone / Mobile</label>
+                    <input type="tel" class="input-box" id="phone_number" name="phone_number" placeholder="+91-XXXXXXXXXX">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="highest_qualification">Highest Degree / Qualification</label>
+                <input type="text" class="input-box" id="highest_qualification" name="highest_qualification" placeholder="e.g. B.Tech in Computer Science">
+            </div>
+
+            <div class="form-group">
+                <label for="university_college">University / Institution</label>
+                <input type="text" class="input-box" id="university_college" name="university_college" placeholder="e.g. Vellore Institute of Technology">
+            </div>
+
+            <div class="form-group">
+                <label for="technical_skills">Key Technologies & Languages</label>
+                <input type="text" class="input-box" id="technical_skills" name="technical_skills" placeholder="e.g. Java, Python, SQL, HTML">
+            </div>
+
+            <div class="form-group">
+                <label for="certifications">Certifications Obtained</label>
+                <input type="text" class="input-box" id="certifications" name="certifications" placeholder="e.g. AWS Certified, IBM Watsonx">
+            </div>
+
+            <button type="button" class="submit-btn">Submit Application</button>
+        </form>
+    </div>
+</body>
+</html>

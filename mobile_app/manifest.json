@@ -1,0 +1,16 @@
+{
+  "short_name": "FormFill AI",
+  "name": "Automatic Form-Filling Mobile App",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "/mobile/",
+  "background_color": "#4f46e5",
+  "theme_color": "#4f46e5",
+  "display": "standalone",
+  "orientation": "portrait"
+}

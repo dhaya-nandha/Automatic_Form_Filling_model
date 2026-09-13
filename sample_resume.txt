@@ -1,0 +1,11 @@
+
+    John Alex Doe
+    Software Engineer | Data Scientist
+    Email: john.doe@example.com
+    Phone: +1 555-019-2831
+    DOB: 15/08/1996
+    National ID: ID-987654321
+    Highest Qualification: B.Tech in Computer Science
+    Work Experience: 5 years of experience in AI and Full-Stack Engineering.
+    Residential Address: 123 Tech Park Way, Silicon Valley, CA
+    

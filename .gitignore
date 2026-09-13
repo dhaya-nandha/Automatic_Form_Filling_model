@@ -1,0 +1,26 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Database
+*.db
+form_filler.db
+
+# Large binaries & Generated assets
+downloads/
+uploads/*.pdf
+uploads/*.docx
+filled_form_preview.png
+filled_application_form*.pdf
+FormFill_AI.apk
+
+# Node & Android Build artifacts
+node_modules/
+android/app/build/
+android/.gradle/
+android/local.properties
+.idea/
+
+# Environment variables
+.env
