@@ -86,6 +86,20 @@ def root():
         return FileResponse(str(index_path))
     return RedirectResponse(url="/mobile/")
 
+@app.get("/style.css")
+def get_style_css():
+    css_path = Path(config.BASE_DIR) / "style.css"
+    if css_path.exists():
+        return FileResponse(str(css_path), media_type="text/css")
+    raise HTTPException(status_code=404, detail="CSS not found")
+
+@app.get("/app.js")
+def get_app_js():
+    js_path = Path(config.BASE_DIR) / "app.js"
+    if js_path.exists():
+        return FileResponse(str(js_path), media_type="application/javascript")
+    raise HTTPException(status_code=404, detail="JS not found")
+
 @app.get("/preview-image")
 def get_preview_image():
     img_path = Path(config.BASE_DIR) / "filled_form_preview.png"

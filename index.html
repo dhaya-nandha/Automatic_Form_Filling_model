@@ -3,10 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FormFill AI — Automatic Form Filling Platform</title>
+    <title>FormFill AI — Autonomous Form Filling Platform</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+
+    <!-- Dynamic Ambient Background Glow Orbs -->
+    <div class="bg-orbs" aria-hidden="true">
+        <div class="orb orb-primary"></div>
+        <div class="orb orb-cyan"></div>
+        <div class="orb orb-purple"></div>
+        <div class="bg-grid-overlay"></div>
+    </div>
 
     <!-- Header Navigation -->
     <header class="navbar">
@@ -15,7 +27,7 @@
                 <div class="logo-icon">⚡</div>
                 <div class="logo-text">
                     <span class="brand-name">FormFill <span class="highlight">AI</span></span>
-                    <span class="brand-sub">Automatic Form-Filling Platform</span>
+                    <span class="brand-sub">Autonomous Form-Filling Platform</span>
                 </div>
             </div>
             <nav class="nav-links">
@@ -40,8 +52,11 @@
             
             <!-- Hero Banner -->
             <div class="hero-banner">
-                <h1>Automatic Google Form & Web Form Filler</h1>
-                <p>Upload your resume or marksheets, paste any live form link, and watch AI parse, match, and fill inputs automatically.</p>
+                <div class="hero-pill">
+                    <span class="pulse-dot"></span> NEURAL AGENTIC ENGINE v2.4
+                </div>
+                <h1>Autonomous Google Form & Web Form Automation</h1>
+                <p>Upload your resume or marksheets, enter any target form URL, and watch AI parse document facts, semantically map input fields, and submit forms seamlessly.</p>
             </div>
 
             <!-- Workflow Grid -->
@@ -63,13 +78,15 @@
                         <div id="sandbox-upload-status" class="alert-box hidden"></div>
                     </div>
 
-                    <div class="card-header" style="margin-top: 24px; border-top: 1px solid var(--border); padding-top: 20px;">
+                    <div class="card-header" style="margin-top: 28px; border-top: 1px solid var(--card-border); padding-top: 24px;">
                         <h2><span class="step-num">2</span> Target Google Form / Web Form Link</h2>
                     </div>
                     <div class="card-body">
                         <div class="form-group">
                             <label for="sandbox-form-url">Live Google Form URL or Web Link</label>
-                            <input type="text" id="sandbox-form-url" class="form-control" placeholder="https://docs.google.com/forms/d/e/.../viewform" value="https://docs.google.com/forms/d/e/1FAIpQLSeuoP6EKvaRjYLa0rWlGFlsZpOwKJNVufoNg4oy7o5sdnswMw/viewform">
+                            <div class="input-glow-wrapper">
+                                <input type="text" id="sandbox-form-url" class="form-control" placeholder="https://docs.google.com/forms/d/e/.../viewform" value="https://docs.google.com/forms/d/e/1FAIpQLSeuoP6EKvaRjYLa0rWlGFlsZpOwKJNVufoNg4oy7o5sdnswMw/viewform">
+                            </div>
                         </div>
 
                         <button id="btn-run-autofill" class="btn btn-primary btn-block">
@@ -82,6 +99,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h2><span class="step-num">3</span> AI Matching & Execution Results</h2>
+                        <span class="badge cyber">LIVE RUNTIME</span>
                     </div>
                     <div class="card-body">
                         <div id="sandbox-placeholder" class="empty-state">
@@ -128,7 +146,12 @@
 
                             <!-- Live Screenshot Preview -->
                             <div class="screenshot-wrapper" id="screenshot-box">
-                                <h3>📸 Live Form Browser Screenshot Preview</h3>
+                                <div class="browser-mockup-header">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                    <span class="mockup-title">Playwright Headless Browser Preview</span>
+                                </div>
                                 <div class="img-frame">
                                     <img id="screenshot-img" src="" alt="Filled Form Screenshot Preview">
                                 </div>
@@ -178,7 +201,7 @@
                         </div>
                     </div>
 
-                    <button id="btn-fill-pdf" class="btn btn-secondary btn-block" style="margin-top: 15px;">
+                    <button id="btn-fill-pdf" class="btn btn-secondary btn-block" style="margin-top: 20px;">
                         <span>📥 Fill & Export PDF Document</span>
                     </button>
 
@@ -217,7 +240,7 @@
                         <div class="endpoint-desc">Triggers Playwright Chromium engine to fill live Google Forms and returns screenshot preview.</div>
                     </div>
 
-                    <div style="margin-top: 20px;">
+                    <div style="margin-top: 24px;">
                         <a href="/docs" target="_blank" class="btn btn-outline">📖 Open Interactive Swagger / OpenAPI Documentation</a>
                     </div>
                 </div>
@@ -229,7 +252,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
-            <p>FormFill AI Platform &copy; 2026 — End-to-End Automatic Form Filling System</p>
+            <p>FormFill AI Platform &copy; 2026 — End-to-End Autonomous Form Filling System</p>
         </div>
     </footer>
 

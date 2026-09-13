@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!sandboxDocInput.files.length) return;
 
             sandboxUploadStatus.className = 'alert-box info';
-            sandboxUploadStatus.innerText = '⏳ Extracting structured facts from document(s)...';
+            sandboxUploadStatus.innerText = '⏳ Neural Agent parsing document facts...';
             sandboxUploadStatus.classList.remove('hidden');
 
             for (let file of sandboxDocInput.files) {
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const data = await res.json();
                     if (res.ok) {
                         sandboxUploadStatus.className = 'alert-box success';
-                        sandboxUploadStatus.innerText = `✅ Processed "${file.name}"! Facts stored in Profile Vault.`;
+                        sandboxUploadStatus.innerText = `✅ Processed "${file.name}"! Structured entities saved to Vault.`;
                         loadProfileVault();
                     } else {
                         sandboxUploadStatus.className = 'alert-box danger';
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             btnRunAutofill.disabled = true;
-            btnRunAutofill.innerHTML = '<span>⏳ Playwright Browsing & Filling Live Form...</span>';
+            btnRunAutofill.innerHTML = '<span>⚡ Playwright Engine Executing Live Form...</span>';
 
             try {
                 const res = await fetch(`${API_BASE}/api/fill-form`, {
@@ -182,7 +182,7 @@ async function checkServerHealth() {
         const res = await fetch(`${API_BASE}/api/profile`);
         if (res.ok) {
             if (badgeText) badgeText.innerText = 'Server Online';
-            if (badge) badge.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+            if (badge) badge.style.borderColor = 'rgba(16, 185, 129, 0.35)';
         }
     } catch (e) {
         if (badgeText) badgeText.innerText = 'Server Offline';
@@ -200,19 +200,28 @@ async function loadProfileVault() {
         const fields = await res.json();
 
         if (!fields || fields.length === 0) {
-            gridEl.innerHTML = '<div class="empty-state"><p>No facts extracted yet. Upload any document to populate your profile vault!</p></div>';
+            gridEl.innerHTML = '<div class="empty-state"><div class="empty-icon">📂</div><p>No facts extracted yet. Upload any document to populate your profile vault!</p></div>';
             if (countBadge) countBadge.innerText = '0 Facts Extracted';
             return;
         }
 
         if (countBadge) countBadge.innerText = `${fields.length} Facts Extracted`;
 
-        gridEl.innerHTML = fields.map(f => `
-            <div class="profile-card">
-                <div class="profile-card-key">${f.canonical_key.replace(/_/g, ' ')}</div>
-                <div class="profile-card-val">${f.field_value}</div>
-            </div>
-        `).join('');
+        gridEl.innerHTML = fields.map(f => {
+            const conf = Math.round((f.confidence_score || 0.95) * 100);
+            return `
+                <div class="profile-card">
+                    <div class="profile-card-key">
+                        <span>${f.canonical_key.replace(/_/g, ' ')}</span>
+                        <span style="color: #06b6d4;">${conf}%</span>
+                    </div>
+                    <div class="profile-card-val">${f.field_value}</div>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" style="width: ${conf}%;"></div>
+                    </div>
+                </div>
+            `;
+        }).join('');
     } catch (err) {
         gridEl.innerHTML = '<div class="empty-state"><p>Unable to load profile vault data.</p></div>';
     }
