@@ -10,6 +10,58 @@ An end-to-end **Web Application Platform & FastAPI Backend System** that automat
 
 ---
 
+## 📋 How to Run & Verify this Work (Step-by-Step for Team Lead & Testers)
+
+Follow these simple steps to start the application and test all features:
+
+### 1️⃣ Step 1: Start the Web Application Server
+
+* **Option A: One-Click Launcher (Windows)**:
+  Simply double-click the **`run.bat`** file in the project folder!
+
+* **Option B: Command Line (Linux / macOS / Windows)**:
+  ```bash
+  # 1. Install dependencies
+  pip install -r requirements.txt
+  playwright install chromium
+
+  # 2. Run the server
+  python main.py
+  ```
+
+---
+
+### 2️⃣ Step 2: Open the Web Platform
+
+Open your web browser and navigate to:
+👉 **[http://127.0.0.1:5000/](http://127.0.0.1:5000/)**
+
+*(For interactive API documentation & Swagger UI, open [http://127.0.0.1:5000/docs](http://127.0.0.1:5000/docs)).*
+
+---
+
+### 3️⃣ Step 3: Test & Verify Features
+
+1. **⚡ Live Auto-Fill Sandbox**:
+   * Under **Section 1**, drag and drop any resume or marksheet document (`.pdf`, `.docx`, `.txt`).
+   * Under **Section 2**, enter any live Google Form URL (e.g. `https://docs.google.com/forms/d/e/1FAIpQLSeuoP6EKvaRjYLa0rWlGFlsZpOwKJNVufoNg4oy7o5sdnswMw/viewform`).
+   * Click **`⚡ Auto-Fill Live Form Now`**.
+   * **Verification**: Watch Playwright launch the browser, automatically match questions, fill fields, and render a **live browser screenshot preview** and **semantic similarity matrix**!
+
+2. **👤 Profile Vault**:
+   * Click the **Profile Vault** tab at the top.
+   * **Verification**: View all extracted canonical entities (Name, Email, Phone, Education, Experience, Skills) with confidence percentage scores.
+
+3. **📄 PDF Form Filler**:
+   * Click the **PDF Form Filler** tab.
+   * Select a resume file and static PDF form, then click **Fill & Export PDF Document**.
+   * **Verification**: Download the filled PDF form overlay.
+
+4. **🛠️ Deep Learning Model Teammate Hook**:
+   * Teammates can plug custom trained NER or field matching model weights directly into `extract_structured_profile()` in [`core/extractor.py`](file:///c:/Users/John/OneDrive/Documents/Desktop/dl%20project/core/extractor.py) or hook into `POST /api/match-fields`.
+
+---
+
 ## 🚀 Key Features
 
 * **⚡ Live Form Auto-Fill Sandbox**: Input any live Google Form or web link, trigger Playwright automated browser filling, view real-time field match matrices, and preview live browser screenshots.
@@ -51,30 +103,6 @@ This codebase provides clean, decoupled hooks for team members developing custom
 
 2. **Semantic Field Matcher API**:
    The endpoint `POST /api/match-fields` accepts raw form questions and invokes [`core/field_matcher.py`](file:///c:/Users/John/OneDrive/Documents/Desktop/dl%20project/core/field_matcher.py), which uses cosine similarity over `sentence-transformers/all-MiniLM-L6-v2`.
-
----
-
-## 💻 Quick Start & Running Locally
-
-### Option A: One-Click Execution (Windows)
-Double-click the **`run.bat`** file in the project root folder.
-
-### Option B: Command Line
-
-1. **Install Dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   playwright install chromium
-   ```
-
-2. **Start Server**:
-   ```bash
-   python main.py
-   ```
-
-3. **Access in Web Browser**:
-   * **Web Application UI**: [http://127.0.0.1:5000/](http://127.0.0.1:5000/)
-   * **Interactive API Documentation (Swagger)**: [http://127.0.0.1:5000/docs](http://127.0.0.1:5000/docs)
 
 ---
 
