@@ -235,7 +235,10 @@ def get_profile(db: Session = Depends(get_db)):
 def match_fields(request: FormMatchRequest, db: Session = Depends(get_db)):
     """Accepts list of form inputs and returns predicted field matches & suggested auto-fill actions."""
     user_profile = get_latest_user_profile(db)
-    raw_fields = [f.model_dump() for f in request.fields]
+    raw_fields = [
+        f.model_dump() if hasattr(f, "model_dump") else f.dict() if hasattr(f, "dict") else (f if isinstance(f, dict) else getattr(f, "__dict__", {}))
+        for f in request.fields
+    ]
     match_results = matcher.match_and_fill(raw_fields, user_profile)
 
     auto_fill_count = sum(1 for m in match_results if m["action"] in ["AUTO_FILL", "INFERRED"])

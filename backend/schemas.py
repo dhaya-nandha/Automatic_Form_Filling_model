@@ -1,6 +1,18 @@
-from pydantic import BaseModel
 from typing import List, Dict, Optional, Any
 from datetime import datetime
+
+try:
+    from pydantic import BaseModel
+except Exception as e:
+    print(f"[Schemas Warning] Pydantic C-extension fallback active: {e}")
+    class BaseModel:
+        def __init__(self, **kwargs):
+            for k, v in kwargs.items():
+                setattr(self, k, v)
+        def model_dump(self):
+            return self.__dict__
+        def dict(self):
+            return self.__dict__
 
 class ProfileFieldBase(BaseModel):
     canonical_key: str
