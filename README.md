@@ -154,3 +154,32 @@ This codebase provides clean, decoupled hooks for team members developing custom
 ## 📄 License
 
 This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+
+QA / TESTING
+
+The testing resources for the Automatic Form Filling Model are maintained in the sample-forms folder.
+
+Sample Forms:
+- Google Forms links
+- Job portal links
+- Job application forms
+
+Testing Focus:
+- Field matching accuracy
+- Automatic field filling
+- Missing information handling
+- Ambiguous field labels
+- Multi-page forms
+- Identity field safety
+
+Important Safety Rule:
+The system must never guess sensitive identity information such as government ID numbers, date of birth, passport numbers, or similar identity fields. If the required information is missing or ambiguous, the field should be flagged for user review.
+
+Test Data:
+- Sample Google Forms
+- Job application forms
+- Different types of form fields
+- Forms with ambiguous or missing information
+
+Bug Tracking:
+Testing issues and bugs should be recorded in GitHub Issues with the test case, form used, test data, expected result, actual result, severity, and status.
